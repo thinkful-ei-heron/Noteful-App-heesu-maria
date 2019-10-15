@@ -16,7 +16,7 @@ class App extends Component {
     };
 
     componentDidMount() {
-        setTimeout(() => this.setState(dummyStore), 0);
+        setTimeout(() => this.setState(dummyStore));
     }
 
     renderNavRoutes() {
@@ -54,7 +54,7 @@ class App extends Component {
     }
 
     renderMainRoutes() {
-        const {notes, folders} = this.state;
+        const {notes} = this.state;
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
