@@ -1,4 +1,5 @@
 import React  from 'react';
+import {Route, Link} from 'react-router-dom';
 import {BrowserRouter} from 'react-router-dom';
 import './App.css';
 import store from './store';
@@ -9,10 +10,8 @@ import Main from './Main';
 
 class App extends React.Component {
   state={
-    notes: store.notes,
-    folders: store.folders,
-    sidebar: {}
-    noteSection: []
+    notes: [],
+    folders: []
   }
 
   componentDidMount() {
@@ -20,15 +19,36 @@ class App extends React.Component {
   };
 
   renderNavRoutes() {
+    const {notes, folders} = this.state;
     return (
-
-    )
-  };
+      <>
+      {['/', '/folder/:folderId'].map(path => (
+          <Route
+              exact
+              key={path}
+              path={path}
+              render={routeProps => (
+                  <NoteListNav
+                      folders={folders}
+                      notes={notes}
+                      {...routeProps}
+                  />
+              )}
+        </>
+    ))}
 
   renderMainRoutes() {
+    const {notes, folders} = this.state;
     return (
+      <>        
+        {'/', '/folder/:folderID'}.map(path => (
+          <Route
+          exact
+      ))
 
     )
+      </> 
+
   };
 
   folderClicked = (id) => {
