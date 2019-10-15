@@ -1,5 +1,5 @@
 import React from 'react'
-import Note from '../Note/Note'
+import Note from './Note'
 import './NotePageMain.css'
 
 export default function NotePageMain(props) {

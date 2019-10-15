@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from './CircleButton'
-// import { countNotesForFolder } from '../notes-helpers'
+import { countNotesForFolder } from './notes-helpers'
 import './NoteListNav.css'
 
 export default function NoteListNav(props) {

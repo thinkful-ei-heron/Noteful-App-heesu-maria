@@ -6,7 +6,7 @@ import NotePageNav from './Component/NotePageNav';
 import NoteListMain from './Component/NoteListMain';
 import NotePageMain from './Component/NotePageMain';
 import dummyStore from './dummy-store';
-import {getNotesForFolder, findNote, findFolder} from '../notes-helpers';
+import {getNotesForFolder, findNote, findFolder} from './notes-helpers';
 import './App.css';
 
 class App extends Component {
@@ -16,7 +16,6 @@ class App extends Component {
     };
 
     componentDidMount() {
-        // fake date loading from API call
         setTimeout(() => this.setState(dummyStore), 600);
     }
 
