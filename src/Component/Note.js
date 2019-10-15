@@ -1,4 +1,5 @@
 import React from 'react';
 
+export default function Note(props) {
 
-export default function Note (props) 
+    render() ==
