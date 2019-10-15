@@ -1,6 +1,5 @@
 import React  from 'react';
 import {Route, Link} from 'react-router-dom';
-import {BrowserRouter} from 'react-router-dom';
 import './App.css';
 import store from './store';
 import Sidebar from './Component/Sidebar';
@@ -40,37 +39,54 @@ class App extends React.Component {
   renderMainRoutes() {
     const {notes, folders} = this.state;
     return (
-      <>        
-        {'/', '/folder/:folderID'}.map(path => (
+      <>
+      {['/', '/folder/:folderId'].map(path => (
           <Route
-          exact
-      ))
-
+              exact
+              key={path}
+              path={path}
+              render={routeProps => {
+                  const {folderId} = routeProps.match.params;
+                  const notesForFolder = getNotesForFolder(
+                      notes,
+                      folderId
+                  );
+                  return (
+                      <NoteListMain
+                          {...routeProps}
+                          notes={notesForFolder}
+                      />
+                  );
+              }}
+          />
+      ))}
+      <Route
+          path="/note/:noteId"
+          render={routeProps => {
+              const {noteId} = routeProps.match.params;
+              const note = findNote(notes, noteId);
+              return <NotePageMain {...routeProps} note={note} />;
+          }}
+      />
+  </>
     )
-      </> 
-
-  };
-
-  folderClicked = (id) => {
-    let newArray = this.state.notes.filter(notes => notes.folderId === id);
-    this.setState({
-      noteSection: newArray,
-    })
   }
+
 
   render() {
-    const {notes, folders} = this.state;
     return (
-      <div className='app'>
-        <Sidebar folders={this.state.folders} folderClicked={this.folderClicked}/>
-        <header>
-          <h1>Noteful</h1>
-        </header>
-
-        <Main folders={this.state.folders} notes={this.state.notes} />
-      </div>
-    )
-  }
-};
+        <div className="App">
+            <nav className="App__nav">{this.renderNavRoutes()}</nav>
+            <header className="App__header">
+                <h1>
+                    <Link to="/">Noteful</Link>{' '}
+                    <FontAwesomeIcon icon="check-double" />
+                </h1>
+            </header>
+            <main className="App__main">{this.renderMainRoutes()}</main>
+        </div>
+    );
+}
+}
 
 export default App;
